@@ -134,7 +134,7 @@ function ChartsList() {
   }
   return (
     <>
-      <div className="w-100 " style={{ backgroundColor: "#ededfc", paddingTop:"20px"}}>
+      <div  style={{ backgroundColor: "#ededfc", paddingTop:"20px", paddingBottom:"20px"}}>
         <p> Please select a country</p>
         <Typeahead
           ref={typeaheadRef}

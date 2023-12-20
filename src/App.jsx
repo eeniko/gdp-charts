@@ -10,7 +10,7 @@ function App() {
 
   return (
     <Container>
-     <div className="App w-100">
+     <div className="App">
      <Col>
       <Header />
       <ChartsList />
