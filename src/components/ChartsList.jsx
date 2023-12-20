@@ -47,7 +47,7 @@ function ChartsList() {
     }
   }
   const fetchCountries = () => {
-    fetch("http://api.worldbank.org/v2/country?per_page=300&format=json")
+    fetch("https://api.worldbank.org/v2/country?per_page=300&format=json")
       .then((res) => res.json())
       .then((data) => {
         setCountries(data[1]);
