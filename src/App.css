@@ -1,9 +1,8 @@
 .App {
   text-align: center;
-  width: 1200px;
   align-items: center;
   display: flex;
-  background-color:#ededfc
+  
 }
 
 .select-label{
@@ -17,3 +16,14 @@ margin-top: 20px;
   margin-right: auto;
 }
 
+.chart-container {
+  width: 800px;
+  background-color:#ededfc
+ }
+ 
+
+ @media only screen and (max-width: 800px) {
+  .chart-container {
+     width: 100%;
+  }
+ }

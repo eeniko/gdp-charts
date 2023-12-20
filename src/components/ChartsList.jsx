@@ -1,6 +1,8 @@
+import "react-bootstrap-typeahead/css/Typeahead.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../App.css";
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import Form from "react-bootstrap/Form";
 import {
   BarChart,
   Bar,
@@ -13,10 +15,6 @@ import {
   Area,
 } from "recharts";
 import { Typeahead } from "react-bootstrap-typeahead";
-import "react-bootstrap-typeahead/css/Typeahead.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css'
-
 
 function ChartsList() {
   const [chartData, updateChartData] = useState([]);
@@ -46,70 +44,74 @@ function ChartsList() {
       console.log(error);
     }
   }
-  const fetchCountries = () => {
-    fetch("https://api.worldbank.org/v2/country?per_page=300&format=json")
-      .then((res) => res.json())
-      .then((data) => {
-        setCountries(data[1]);
-      })
-      .catch((err) => console.log(err));
-  };
+  
+  const fetchCountries = async () => {
+    try {
+      const response = await fetch("https://api.worldbank.org/v2/country?per_page=300&format=json");
+      const data = await response.json();
+      setCountries(data[1]);
+    } catch (error) {
+      console.log(error);
+    }
+ };
 
   const selectChange = (event) => {
     setSelectedCountryId(event[0].value);
     typeaheadRef.current.clear();
   };
 
-
-
   function renderBarChartData(barChartData) {
     return (
-      <BarChart
-        width={700}
-        height={350}
-        data={barChartData}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="gdp" fill="darkblue" />
-      </BarChart>
+      <div className="chart-container">
+        <BarChart
+          width={700}
+          height={350}
+          data={barChartData}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="gdp" fill="darkblue" />
+        </BarChart>
+      </div>
     );
   }
 
   function renderAreaChartData(chartData) {
     return (
-      <AreaChart
-        width={700}
-        height={350}
-        data={chartData}
-        margin={{
-          top: 10,
-          right: 30,
-          left: 0,
-          bottom: 0,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Area
-          type="monotone"
-          dataKey="gdp"
-          stroke="#8884d8"
-          fill="darkblue"
-          name={selectedCountryId}
-        />
-      </AreaChart>
+      <div className="chart-container">
+        <AreaChart
+          width={700}
+          height={350}
+          data={chartData}
+          margin={{
+            top: 10,
+            right: 30,
+            left: 0,
+            bottom: 0,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Area
+            type="monotone"
+            dataKey="gdp"
+            stroke="#8884d8"
+            fill="darkblue"
+            name={selectedCountryId}
+          />
+        </AreaChart>
+      </div>
     );
   }
   function renderChartData() {
@@ -132,7 +134,7 @@ function ChartsList() {
   }
   return (
     <>
-      <div>
+      <div className="w-100 " style={{ backgroundColor: "#ededfc" }}>
         <p className="select-label"> Please select a country</p>
         <Typeahead
           ref={typeaheadRef}
@@ -145,10 +147,11 @@ function ChartsList() {
             id: country.id,
           }))}
         />
-      </div>
-    <div className="charts-div">
-      <h2> GDP of {selectedCountryName} </h2>
-      {renderChartData()}
+
+        <div className="charts-div">
+          <h2> GDP of {selectedCountryName} </h2>
+          {renderChartData()}
+        </div>
       </div>
     </>
   );
