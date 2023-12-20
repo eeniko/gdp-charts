@@ -65,8 +65,8 @@ function ChartsList() {
   function renderBarChartData(barChartData) {
     return (
       <BarChart
-        width={800}
-        height={400}
+        width={700}
+        height={350}
         data={barChartData}
         margin={{
           top: 5,
@@ -88,8 +88,8 @@ function ChartsList() {
   function renderAreaChartData(chartData) {
     return (
       <AreaChart
-        width={800}
-        height={400}
+        width={700}
+        height={350}
         data={chartData}
         margin={{
           top: 10,
