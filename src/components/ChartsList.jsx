@@ -134,8 +134,8 @@ function ChartsList() {
   }
   return (
     <>
-      <div className="w-100 " style={{ backgroundColor: "#ededfc" }}>
-        <p className="select-label"> Please select a country</p>
+      <div className="w-100 " style={{ backgroundColor: "#ededfc", paddingTop:"20px"}}>
+        <p> Please select a country</p>
         <Typeahead
           ref={typeaheadRef}
           key={selectedCountryId}
